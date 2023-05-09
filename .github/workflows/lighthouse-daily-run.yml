@@ -15,8 +15,10 @@ jobs:
         uses: ./.github/actions/automated-lighthouse
         with:
           urls: |
-            https://www.google.com
-            https://www.facebook.com/
+            https://www.welovespeed.com/2023/
+            https://www.welovespeed.com/2023/programme/
+            https://www.welovespeed.com/2023/infos-pratiques/
+            https://www.welovespeed.com/2023/merci/
           # budgetPath: ./budget.json # Lighthouse budget file
           # lighthousercPath: ./lighthouserc.json # Lighthouse configuration file
           googleSpreadsheetId: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
