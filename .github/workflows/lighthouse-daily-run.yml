@@ -1,0 +1,29 @@
+name: Lighthouse CI
+on:
+  workflow_dispatch:
+  schedule:
+    # Runs "At 11:00 on every day-of-week from Monday through Friday"
+    - cron: '0 11 * * 1-5'
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Lighthouse
+        timeout-minutes: 15
+        uses: ./.github/actions/automated-lighthouse
+        with:
+          urls: |
+            https://www.google.com
+            https://www.facebook.com/
+          # budgetPath: ./budget.json # Lighthouse budget file
+          # lighthousercPath: ./lighthouserc.json # Lighthouse configuration file
+          googleSpreadsheetId: ${{ secrets.GOOGLE_SPREADSHEET_ID }}
+          googleServiceAccountEmail: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          googlePrivateKey: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          # slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL }}
+          # slackChannel: example-channel
+        # Environment variables injected to the Pupeteer script
+        env:
+          EXAMPLE_ENV: example
